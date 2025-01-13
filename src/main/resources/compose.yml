@@ -1,0 +1,11 @@
+services:
+  bocchi-the-twitter:
+    image: mysql:8.0.34
+    platform: linux/amd64
+    container_name: bocchi-the-twitter
+    ports:
+      - "50000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bocchi_the_twitter
+      TZ: "Asia/Tokyo"
