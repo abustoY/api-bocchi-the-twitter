@@ -2,6 +2,7 @@ package com.yotsuba.bocchi.security;
 
 import com.yotsuba.bocchi.User;
 import com.yotsuba.bocchi.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,12 +38,26 @@ public class AuthenticationController {
     }
 
     @PostMapping("/api/authentication/signup")
-    public void signup(@RequestBody User user){
-        if (!userService.isIdTaken(user.getId())){
-            userService.signup(user.getId(),user.getName(),user.getPassword());
-        }
-        else {
-            throw new RuntimeException("id already taken");
+    public ResponseEntity<String> signup(@RequestBody User user) {
+        try {
+            if (user.getId() == null || user.getId().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("IDは必須です");
+            }
+            if (user.getName() == null || user.getName().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("名前は必須です");
+            }
+            if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("パスワードは必須です");
+            }
+
+            if (userService.isIdTaken(user.getId())) {
+                return ResponseEntity.badRequest().body("このIDは既に使用されています");
+            }
+
+            userService.signup(user.getId(), user.getName(), user.getPassword());
+            return ResponseEntity.ok("ユーザー登録が完了しました");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("サーバーエラー: " + e.getMessage());
         }
     }
 }

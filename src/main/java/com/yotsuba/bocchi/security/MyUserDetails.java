@@ -1,22 +1,26 @@
 package com.yotsuba.bocchi.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class MyUserDetails implements UserDetails {
-    private String password;
-    private String username;
+    private final String password;
+    private final String username;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public MyUserDetails(String password, String username) {
         this.password = password;
         this.username = username;
+        this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override

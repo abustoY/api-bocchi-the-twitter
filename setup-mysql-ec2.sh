@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# EC2などのLinux環境に MySQL 8.0 をインストールするためのセットアップスクリプトです。
+
 wget https://dev.mysql.com/get/mysql84-community-release-el9-1.noarch.rpm
 sudo yum install -y mysql84-community-release-el9-1.noarch.rpm
 yum repolist enabled | grep "mysql.*-community.*"

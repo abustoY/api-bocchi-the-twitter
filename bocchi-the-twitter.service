@@ -1,3 +1,5 @@
+# このファイルは、Bocchi The Twitter アプリケーションを systemd により自動起動・管理するためのユニットファイルです。
+
 [Unit]
 Description=Bocchi The Twitter
 After=network.target

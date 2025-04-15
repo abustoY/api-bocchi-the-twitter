@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 
@@ -19,6 +20,8 @@ public class User {
     private String password;
     @CreatedDate
     private Date created;
+
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String getId() {
         return id;
@@ -42,6 +45,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setPasswordWithHash(String password) {
+        this.password = passwordEncoder.encode(password);
+    }
+
+    public boolean matchesPassword(String rawPassword) {
+        return passwordEncoder.matches(rawPassword, this.password);
     }
 
     public Date getCreated() {

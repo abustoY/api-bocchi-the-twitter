@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Linux サーバーを NATインスタンスとして機能させるための初期設定スクリプトです。AWS側でNATインスタンスは用意されていますが、高いです
+
 sudo sysctl -w net.ipv4.ip_forward=1
 echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p

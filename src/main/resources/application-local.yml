@@ -12,13 +12,11 @@ spring:
     # Database username
     username: root
     # Database password
-    password: root
+    password: password
   jpa:
     properties:
       hibernate:
         # The SQL dialect to use for the database
         dialect: org.hibernate.dialect.MySQL8Dialect
-  liquibase:
-    change-log: classpath:db/changelog/changelog-master.xml
-#Client:
-#  origin: "http://localhost:8080"
+client:
+  origin: "http://localhost:8081"

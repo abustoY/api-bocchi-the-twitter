@@ -1,25 +1,3 @@
-logging:
-  level:
-    #    org.hibernate.SQL: debug
-    org.hibernate.type: trace
-    org.hibernate.orm.jdbc.bind: trace
-    org.hibernate.orm.jdbc.extract: trace
-    org.springframework.security: trace
 spring:
-  datasource:
-    # Database connection URL
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:50000/bocchi_the_twitter?allowPublicKeyRetrieval=true&useSSL=false&connectionTimeZone=SERVER&useLegacyDatetimeCode=false}
-    # Database username
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    # Database password
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
-  jpa:
-    properties:
-      hibernate:
-        # The SQL dialect to use for the database
-        dialect: org.hibernate.dialect.MySQL8Dialect
-  liquibase:
-    change-log: classpath:db/changelog/changelog-master.xml
-    enabled: ${SPRING_LIQUIBASE_ENABLED:false}
-#Client:
-#  origin: ${CLIENT_ORIGIN:hoge}
+  profiles:
+    active: local
