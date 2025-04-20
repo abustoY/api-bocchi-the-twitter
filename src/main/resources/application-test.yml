@@ -20,4 +20,4 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 #Client:
 client:
-  origin: "https://test.bocchi-twitter.com" 
+  origin: ${CLIENT_ORIGIN}
