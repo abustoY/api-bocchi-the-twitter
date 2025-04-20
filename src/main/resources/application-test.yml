@@ -5,6 +5,8 @@ logging:
     org.hibernate.orm.jdbc.bind: trace
     org.hibernate.orm.jdbc.extract: trace
     org.springframework.security: trace
+server:
+  forward-headers-strategy: framework
 spring:
   datasource:
     # Database connection URL
