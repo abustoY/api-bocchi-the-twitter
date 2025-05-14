@@ -34,16 +34,11 @@ public class MySecurityConfig {
                         .loginProcessingUrl("/api/authentication/login")
                         .usernameParameter("id")
                         .passwordParameter("password")
-                        // .successHandler((request, response, authentication) -> {
-                        //     response.setStatus(HttpServletResponse.SC_OK);
-                        // })
                         .successHandler((request, response, authentication) -> {
                             response.setContentType("application/json;charset=UTF-8");
                             response.setStatus(HttpServletResponse.SC_OK);
 
                             Object principal = authentication.getPrincipal();
-                            System.out.println("=== [ログイン成功] principalのクラス: " + principal.getClass().getName());
-                            System.out.println("=== principal: " + principal);
 
                             if (principal instanceof com.yotsuba.bocchi.security.MyUserDetails userDetails) {
                                 var safeUser = new com.yotsuba.bocchi.dto.AuthenticatedUserResponse(
@@ -73,7 +68,6 @@ public class MySecurityConfig {
                                 "/api/authentication/signup",
                                 "/api/authentication/login",
                                 "/error"
-                                // "/api/authentication/user-id"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
