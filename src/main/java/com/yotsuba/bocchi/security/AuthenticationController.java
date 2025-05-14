@@ -32,11 +32,11 @@ public class AuthenticationController {
         );
     }
 
-    @GetMapping("/api/authentication/user-id")
-    public String getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return ((UserDetails) authentication.getPrincipal()).getUsername();
-    }
+    // @GetMapping("/api/authentication/user-id")
+    // public String getUserId() {
+    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //     return ((UserDetails) authentication.getPrincipal()).getUsername();
+    // }
 
     @PostMapping("/api/authentication/signup")
     public ResponseEntity<String> signup(@RequestBody User user) {

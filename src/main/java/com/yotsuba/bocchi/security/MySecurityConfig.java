@@ -72,8 +72,8 @@ public class MySecurityConfig {
                                 "/api/authentication/status",
                                 "/api/authentication/signup",
                                 "/api/authentication/login",
-                                "/error",
-                                "/api/authentication/user-id"
+                                "/error"
+                                // "/api/authentication/user-id"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
