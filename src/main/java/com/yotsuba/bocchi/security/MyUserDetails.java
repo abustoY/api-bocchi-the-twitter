@@ -10,11 +10,13 @@ import java.util.Collections;
 public class MyUserDetails implements UserDetails {
     private final String password;
     private final String username;
+    private final String name;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public MyUserDetails(String password, String username) {
+    public MyUserDetails(String password, String username, String name) {
         this.password = password;
         this.username = username;
+        this.name = name;
         this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
@@ -34,6 +36,10 @@ public class MyUserDetails implements UserDetails {
     public String getUsername() {
 //        return "kita194";
         return this.username;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

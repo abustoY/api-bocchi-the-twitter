@@ -8,6 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.http.HttpStatus;
+
+import java.util.Map;
+
 @RestController
 public class AuthenticationController {
     private final UserService userService;
@@ -17,18 +21,15 @@ public class AuthenticationController {
     }
 
     @GetMapping("/api/authentication/status")
-    public boolean isAuthenticated() {
+    public ResponseEntity<?> getStatus() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication);
-        System.out.println(authentication.getPrincipal());
-
-        if (authentication.getPrincipal() != "anonymousUser") {
-            System.out.println((UserDetails) authentication.getPrincipal());
-            System.out.println(((UserDetails) authentication.getPrincipal()).getUsername());
-            return true;
+        if (!(authentication.getPrincipal() instanceof MyUserDetails userDetails)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return false;
+        return ResponseEntity.ok(
+                new com.yotsuba.bocchi.dto.AuthenticatedUserResponse(userDetails.getUsername(), userDetails.getName())
+        );
     }
 
     @GetMapping("/api/authentication/user-id")

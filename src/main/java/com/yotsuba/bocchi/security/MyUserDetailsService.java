@@ -20,7 +20,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findById(username)
-            .orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません: " + username));
-        return new MyUserDetails(user.getPassword(), user.getId());
+                .orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません: " + username));
+        return new MyUserDetails(user.getPassword(), user.getId(), user.getName());
     }
 }

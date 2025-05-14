@@ -24,39 +24,64 @@ public class MySecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
-            .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .maximumSessions(1)
-            )
-            .formLogin(formLogin -> formLogin
-                .loginProcessingUrl("/api/authentication/login")
-                .usernameParameter("id")
-                .passwordParameter("password")
-                .successHandler((request, response, authentication) -> {
-                    response.setStatus(HttpServletResponse.SC_OK);
-                })
-                .failureHandler((request, response, exception) -> {
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                })
-            )
-            .logout(logout -> logout
-                .logoutUrl("/api/authentication/logout")
-                .logoutSuccessHandler((request, response, authentication) -> {
-                    response.setStatus(HttpServletResponse.SC_OK);
-                })
-                .deleteCookies("JSESSIONID", "XSRF-TOKEN")
-            )
-            .authorizeHttpRequests(request -> request
-                .requestMatchers(
-                    "/api/authentication/status",
-                    "/api/authentication/signup",
-                    "/api/authentication/login",
-                    "/error"
-                ).permitAll()
-                .anyRequest().authenticated()
-            );
+                .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .maximumSessions(1)
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginProcessingUrl("/api/authentication/login")
+                        .usernameParameter("id")
+                        .passwordParameter("password")
+                        // .successHandler((request, response, authentication) -> {
+                        //     response.setStatus(HttpServletResponse.SC_OK);
+                        // })
+                        .successHandler((request, response, authentication) -> {
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.setStatus(HttpServletResponse.SC_OK);
+
+                            Object principal = authentication.getPrincipal();
+                            System.out.println("=== [ログイン成功] principalのクラス: " + principal.getClass().getName());
+                            System.out.println("=== principal: " + principal);
+
+                            if (principal instanceof com.yotsuba.bocchi.security.MyUserDetails userDetails) {
+                                var safeUser = new com.yotsuba.bocchi.dto.AuthenticatedUserResponse(
+                                        userDetails.getUsername(), // ← id を username として取得
+                                        userDetails.getName()
+                                );
+                                new com.fasterxml.jackson.databind.ObjectMapper().writeValue(response.getWriter(), safeUser);
+                            } else {
+                                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                                response.getWriter().write("{\"error\":\"Unexpected principal type\"}");
+                            }
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        })
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/api/authentication/logout")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                        })
+                        .deleteCookies("JSESSIONID", "XSRF-TOKEN")
+                )
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(
+                                "/api/authentication/status",
+                                "/api/authentication/signup",
+                                "/api/authentication/login",
+                                "/error",
+                                "/api/authentication/user-id"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        })
+                );
 
         return http.build();
     }
@@ -73,7 +98,7 @@ public class MySecurityConfig {
         configuration.addAllowedOrigin(clientOrigin);
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
