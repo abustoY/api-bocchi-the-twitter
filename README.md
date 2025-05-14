@@ -49,8 +49,5 @@ Twitter風SNSアプリケーションのバックエンドAPI
 - POST `/api/authentication/logout` - ログアウト
 - GET `/api/authentication/status` - 認証状態確認
 
-### ユーザー関連
-- GET `/api/users/{id}` - ユーザー情報取得
-- PUT `/api/users/{id}` - ユーザー情報更新
 
 
