@@ -16,10 +16,10 @@ public class TweetController {
         this.tweetService = tweetService;
     }
 
-    @GetMapping("/default")
-    public List<Tweet> getTweets() {
-        return tweetService.findAll();
-    }
+    // @GetMapping("/default")
+    // public List<Tweet> getTweets() {
+    //     return tweetService.findAll();
+    // }
 
     @GetMapping
     public List<TweetDto> getAllTweetSummary() {
