@@ -5,6 +5,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "tweets")
@@ -18,6 +20,9 @@ public class Tweet {
     private String text;
     @CreatedDate
     private Date created;
+
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Media> mediaList = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -49,5 +54,13 @@ public class Tweet {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public List<Media> getMediaList() {
+        return mediaList;
+    }
+
+    public void setMediaList(List<Media> mediaList) {
+        this.mediaList = mediaList;
     }
 }

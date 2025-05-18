@@ -3,8 +3,10 @@ logging:
     #    org.hibernate.SQL: debug
     org.hibernate.type: trace
     org.hibernate.orm.jdbc.bind: trace
-    org.hibernate.orm.jdbc.extract: trace
-    org.springframework.security: trace
+#    org.hibernate.orm.jdbc.extract: trace
+    org.hibernate.orm.jdbc.extract: info
+#    org.springframework.security: trace
+    org.springframework.security: info
 spring:
   datasource:
     # Database connection URL
