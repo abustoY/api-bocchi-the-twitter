@@ -68,6 +68,7 @@ public class MySecurityConfig {
                                 "/api/authentication/signup",
                                 "/api/authentication/login",
                                 "/api/tweets",
+                                "/api/media/**",
                                 "/error"
                         ).permitAll()
                         .anyRequest().authenticated()
