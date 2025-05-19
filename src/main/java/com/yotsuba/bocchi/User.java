@@ -1,9 +1,6 @@
 package com.yotsuba.bocchi;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +17,10 @@ public class User {
     private String password;
     @CreatedDate
     private Date created;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] avatar;
+    private String avatarContentType;
 
     private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -61,5 +62,21 @@ public class User {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
     }
 }
