@@ -2,6 +2,9 @@ package com.yotsuba.bocchi;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class UserService {
@@ -27,4 +30,20 @@ public class UserService {
         System.out.println(userRepository.findById(id)+"だった");
         return userRepository.findById(id).orElse(null) != null;
     }
+
+    public record AvatarData(byte[] data, String contentType) {}
+
+    public AvatarData getAvatar(String userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        return new AvatarData(user.getAvatar(), user.getAvatarContentType());
+    }
+
+    public void saveAvatar(String userId, MultipartFile file) throws IOException {
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setAvatarContentType(file.getContentType());
+        user.setAvatar(file.getBytes());
+        userRepository.save(user);
+    }
+
+
 }
