@@ -5,21 +5,24 @@ import java.util.List;
 
 public class TweetDto {
     private Integer id;
+    private String userId;
     private String name;
     private String text;
     private Date created;
     private List<Long> mediaIds;
 
-    public TweetDto(Integer id, String name, String text, Date created) {
+    public TweetDto(Integer id, String userId, String name, String text, Date created) {
         this.id = id;
+        this.userId = userId;
         this.name = name;
         this.text = text;
         this.created = created;
         this.mediaIds = null;
     }
 
-    public TweetDto(Integer id, String name, String text, Date created, List<Long> mediaIds) {
+    public TweetDto(Integer id, String userId, String name, String text, Date created, List<Long> mediaIds) {
         this.id = id;
+        this.userId = userId;
         this.name = name;
         this.text = text;
         this.created = created;
@@ -28,6 +31,10 @@ public class TweetDto {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getName() {
@@ -45,5 +52,4 @@ public class TweetDto {
     public List<Long> getMediaIds() {
         return mediaIds;
     }
-
 }

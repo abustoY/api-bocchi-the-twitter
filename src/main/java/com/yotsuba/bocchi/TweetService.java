@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
-import com.yotsuba.bocchi.Media;
-import com.yotsuba.bocchi.MediaRepository;
 
 @Service
 public class TweetService {
@@ -37,6 +35,7 @@ public class TweetService {
                 .toList();
             return new TweetDto(
                 tweet.getId(),
+                tweet.getUser().getId(),
                 tweet.getUser().getName(),
                 tweet.getText(),
                 tweet.getCreated(),
@@ -53,6 +52,7 @@ public class TweetService {
                 .toList();
             return new TweetDto(
                 tweet.getId(),
+                tweet.getUser().getId(),
                 tweet.getUser().getName(),
                 tweet.getText(),
                 tweet.getCreated(),
@@ -66,14 +66,9 @@ public class TweetService {
         tweet.setText(tweetRequest.getText());
         User user = userRepository.findById(tweetRequest.getUserId()).orElseThrow();
         tweet.setUser(user);
-        System.out.println("tweet.getId():" + tweet.getId());
-        System.out.println("tweet.getCreated():" + tweet.getCreated());
-        System.out.println("tweet.getUser().getName():" + tweet.getUser().getName());
         tweetRepository.save(tweet);
     }
 
-    // 新しいメディア対応のTweet保存処理
-    // mediaFiles が null/空の場合も考慮
     public void saveTweetWithMedia(String userId, String text, List<MultipartFile> mediaFiles) {
         Tweet tweet = new Tweet();
         tweet.setText(text);
@@ -105,7 +100,6 @@ public class TweetService {
         if (isTweetOwnedByUser(tweetId, ((UserDetails) authentication.getPrincipal()).getUsername())) {
             tweetRepository.deleteById(tweetId);
         }
-
     }
 
     public boolean isTweetOwnedByUser(Integer tweetId, String userId) {
