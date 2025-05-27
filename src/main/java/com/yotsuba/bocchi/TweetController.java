@@ -26,13 +26,11 @@ public class TweetController {
     @GetMapping
     public List<TweetDto> getAllTweetSummary() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("called getAllTweetSummary");
-        System.out.println(authentication);
-        System.out.println(authentication.getName());
-        System.out.println(authentication.getPrincipal());
-        System.out.println(authentication.getCredentials());
-        System.out.println(authentication.getAuthorities());
-        System.out.println("called getAllTweetSummary");
+//        System.out.println(authentication);
+//        System.out.println(authentication.getName());
+//        System.out.println(authentication.getPrincipal());
+//        System.out.println(authentication.getCredentials());
+//        System.out.println(authentication.getAuthorities());
         return tweetService.findAllTweetSummary();
     }
 

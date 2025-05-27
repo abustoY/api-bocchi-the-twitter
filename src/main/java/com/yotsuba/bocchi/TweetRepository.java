@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TweetRepository extends JpaRepository<Tweet, Integer> {
-    List<Tweet> findAllByOrderByCreatedAsc();
-    List<Tweet> findByUser_IdOrderByCreatedAsc(String userId);
+    List<Tweet> findAllByOrderByCreatedDesc();
+    List<Tweet> findByUser_IdOrderByCreatedDesc(String userId);
 }

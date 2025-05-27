@@ -28,7 +28,7 @@ public class TweetService {
     }
 
     public List<TweetDto> findAllTweetSummary() {
-        List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedAsc();
+        List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedDesc();
         return tweets.stream().map(tweet -> {
             List<Long> mediaIds = tweet.getMediaList().stream()
                 .map(Media::getId)
@@ -45,7 +45,7 @@ public class TweetService {
     }
 
     public List<TweetDto> findUserAllTweetSummary(String userId) {
-        List<Tweet> tweets = tweetRepository.findByUser_IdOrderByCreatedAsc(userId);
+        List<Tweet> tweets = tweetRepository.findByUser_IdOrderByCreatedDesc(userId);
         return tweets.stream().map(tweet -> {
             List<Long> mediaIds = tweet.getMediaList().stream()
                 .map(Media::getId)
