@@ -1,0 +1,71 @@
+users:
+  - id: "user1"
+    name: "テストユーザー"
+    password: "password"
+
+tweets:
+  - id: 1
+    user_id: "user1"
+    text: "最初のツイート"
+    created: "2024-01-01 10:00:00"
+
+  - id: 2
+    user_id: "user1"
+    text: "2番目のツイート"
+    created: "2024-01-01 11:00:00"
+
+  - id: 3
+    user_id: "user1"
+    text: "3番目のツイート"
+    created: "2024-01-01 12:00:00"
+
+  - id: 4
+    user_id: "user1"
+    text: "4番目のツイート"
+    created: "2024-01-01 13:00:00"
+
+  - id: 5
+    user_id: "user1"
+    text: "5番目のツイート"
+    created: "2024-01-01 14:00:00"
+
+media:
+  - id: 1
+    file_name: "image1.jpg"
+    content_type: "image/jpeg"
+    data: !!binary |
+      R0lGODdhAQABAIAAAAUEBA==
+    created: "2024-01-01 10:01:00"
+    tweet_id: 1
+
+  - id: 2
+    file_name: "image2.png"
+    content_type: "image/png"
+    data: !!binary |
+      iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB
+    created: "2024-01-01 11:01:00"
+    tweet_id: 2
+
+  - id: 3
+    file_name: "image3.jpg"
+    content_type: "image/jpeg"
+    data: !!binary |
+      R0lGODdhAQABAIAAAAUEBA==
+    created: "2024-01-01 12:01:00"
+    tweet_id: 3
+
+  - id: 4
+    file_name: "image4.jpg"
+    content_type: "image/jpeg"
+    data: !!binary |
+      R0lGODdhAQABAIAAAAUEBA==
+    created: "2024-01-01 13:01:00"
+    tweet_id: 4
+
+  - id: 5
+    file_name: "image5.jpg"
+    content_type: "image/jpeg"
+    data: !!binary |
+      R0lGODdhAQABAIAAAAUEBA==
+    created: "2024-01-01 14:01:00"
+    tweet_id: 5
