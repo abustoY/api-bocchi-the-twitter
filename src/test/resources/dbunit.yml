@@ -1,0 +1,40 @@
+caseInsensitiveStrategy: LOWERCASE
+expectedDbType: MYSQL
+properties:
+  schema: bocchi_the_twitter
+
+#caseInsensitiveStrategyについては公式ドキュメントの以下引用参照
+#公式ドキュメント:https://database-rider.github.io/database-rider/1.44.0/documentation.html
+#
+#Here is a dbunit.yml example, also the default values:
+#
+#  src/test/resources/dbunit.yml
+#cacheConnection: true
+#cacheTableNames: true
+#leakHunter: false
+#caseInsensitiveStrategy: !!com.github.database.rider.core.api.configuration.Orthography 'UPPERCASE'
+#properties:
+#  batchedStatements:  false
+#  qualifiedTableNames: false
+#  caseSensitiveTableNames: false
+#  batchSize: 100
+#  fetchSize: 100
+#  allowEmptyFields: false
+#  escapePattern:
+#connectionConfig:
+#  driver: ""
+#  url: ""
+#  user: ""
+#  password: ""
+#  Database connection will be reused among tests
+#  Caches table names to avoid query connection metadata unnecessarily
+#  Activate connection leak detection. In case a leak (open JDBC connections is increased after test execution) is found an exception is thrown and test fails.
+#  When caseSensitiveTableNames is false will apply letter case based on configured strategy. Valid values are UPPERCASE and LOWERCASE.
+#  Enables usage of JDBC batched statement
+#Enable or disable multiple schemas support. If enabled, Dbunit access tables with names fully qualified by schema using this format: SCHEMA.TABLE.
+#  Enable or disable case sensitive table names. If enabled, Dbunit handles all table names in a case sensitive way.
+#  Specifies the size of JDBC batch updates
+#  Specifies statement fetch size for loading data into a result set table.
+#  Allow to call INSERT/UPDATE with empty strings ('').
+#  Allows schema, table and column names escaping. The property value is an escape pattern where the ? is replaced by the name. For example, the pattern "[?]" is expanded as "[MY_TABLE]" for a table named "MY_TABLE". The most common escape pattern is ""?"" which surrounds the table name with quotes (for the above example it would result in ""MY_TABLE""). As a fallback if no questionmark is in the given String and its length is one it is used to surround the table name on the left and right side. For example the escape pattern """ will have the same effect as the escape pattern ""?"".
+#  JDBC connection configuration, it will be used in case you don’t provide a connection inside test (except in CDI test where connection is inferred from entity manager).
