@@ -27,37 +27,65 @@ public class TweetService {
         return tweetRepository.findAll();
     }
 
-    public List<TweetDto> findAllTweetSummary() {
-        List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedDesc();
+//    public List<TweetDto> findAllTweetSummary() {
+//        List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedDesc();
+//        return tweets.stream().map(tweet -> {
+//            List<Long> mediaIds = tweet.getMediaList().stream()
+//                .map(Media::getId)
+//                .toList();
+//            return new TweetDto(
+//                tweet.getId(),
+//                tweet.getUser().getId(),
+//                tweet.getUser().getName(),
+//                tweet.getText(),
+//                tweet.getCreated(),
+//                mediaIds
+//            );
+//        }).toList();
+//    }
+//
+//    public List<TweetDto> findUserAllTweetSummary(String userId) {
+//        List<Tweet> tweets = tweetRepository.findByUser_IdOrderByCreatedDesc(userId);
+//        return tweets.stream().map(tweet -> {
+//            List<Long> mediaIds = tweet.getMediaList().stream()
+//                .map(Media::getId)
+//                .toList();
+//            return new TweetDto(
+//                tweet.getId(),
+//                tweet.getUser().getId(),
+//                tweet.getUser().getName(),
+//                tweet.getText(),
+//                tweet.getCreated(),
+//                mediaIds
+//            );
+//        }).toList();
+//    }
+
+    public List<TweetDto> findAllTweetSummary(int page, int size) {
+        int safeSize = Math.min(Math.max(size, 1), 100);
+        int safePage = Math.max(page, 0);
+        int offset = safePage * safeSize;
+
+        List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedDesc(offset, safeSize);
         return tweets.stream().map(tweet -> {
-            List<Long> mediaIds = tweet.getMediaList().stream()
-                .map(Media::getId)
-                .toList();
+            List<Long> mediaIds = tweet.getMediaList().stream().map(Media::getId).toList();
             return new TweetDto(
-                tweet.getId(),
-                tweet.getUser().getId(),
-                tweet.getUser().getName(),
-                tweet.getText(),
-                tweet.getCreated(),
-                mediaIds
-            );
+                    tweet.getId(), tweet.getUser().getId(), tweet.getUser().getName(),
+                    tweet.getText(), tweet.getCreated(), mediaIds);
         }).toList();
     }
 
-    public List<TweetDto> findUserAllTweetSummary(String userId) {
-        List<Tweet> tweets = tweetRepository.findByUser_IdOrderByCreatedDesc(userId);
+    public List<TweetDto> findUserAllTweetSummary(String userId, int page, int size) {
+        int safeSize = Math.min(Math.max(size, 1), 100);
+        int safePage = Math.max(page, 0);
+        int offset = safePage * safeSize;
+
+        List<Tweet> tweets = tweetRepository.findByUser_IdOrderByCreatedDesc(userId, offset, safeSize);
         return tweets.stream().map(tweet -> {
-            List<Long> mediaIds = tweet.getMediaList().stream()
-                .map(Media::getId)
-                .toList();
+            List<Long> mediaIds = tweet.getMediaList().stream().map(Media::getId).toList();
             return new TweetDto(
-                tweet.getId(),
-                tweet.getUser().getId(),
-                tweet.getUser().getName(),
-                tweet.getText(),
-                tweet.getCreated(),
-                mediaIds
-            );
+                    tweet.getId(), tweet.getUser().getId(), tweet.getUser().getName(),
+                    tweet.getText(), tweet.getCreated(), mediaIds);
         }).toList();
     }
 

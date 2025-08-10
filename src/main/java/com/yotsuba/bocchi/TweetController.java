@@ -23,20 +23,35 @@ public class TweetController {
     //     return tweetService.findAll();
     // }
 
+//    @GetMapping
+//    public List<TweetDto> getAllTweetSummary() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+////        System.out.println(authentication);
+////        System.out.println(authentication.getName());
+////        System.out.println(authentication.getPrincipal());
+////        System.out.println(authentication.getCredentials());
+////        System.out.println(authentication.getAuthorities());
+//        return tweetService.findAllTweetSummary();
+//    }
+
+//    @GetMapping("/user")
+//    public List<TweetDto> getUserAllTweetSummary(@RequestParam(name = "user_id", required = true) String userId) {
+//        return tweetService.findUserAllTweetSummary(userId);
+//    }
+
     @GetMapping
-    public List<TweetDto> getAllTweetSummary() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        System.out.println(authentication);
-//        System.out.println(authentication.getName());
-//        System.out.println(authentication.getPrincipal());
-//        System.out.println(authentication.getCredentials());
-//        System.out.println(authentication.getAuthorities());
-        return tweetService.findAllTweetSummary();
+    public List<TweetDto> getAllTweetSummary(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return tweetService.findAllTweetSummary(page, size);
     }
 
     @GetMapping("/user")
-    public List<TweetDto> getUserAllTweetSummary(@RequestParam(name = "user_id", required = true) String userId) {
-        return tweetService.findUserAllTweetSummary(userId);
+    public List<TweetDto> getUserAllTweetSummary(
+            @RequestParam(name = "user_id") String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return tweetService.findUserAllTweetSummary(userId, page, size);
     }
 
     // 旧API: JSON形式でのTweet投稿（メディア無し）
