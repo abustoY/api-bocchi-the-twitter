@@ -21,7 +21,7 @@ public class TweetRepositoryTest {
 
     @Test
     void testFindAllByOrderByCreatedDesc() {
-        List<Tweet> result = tweetRepository.findAllByOrderByCreatedDesc();
+        List<Tweet> result = tweetRepository.findAllByOrderByCreatedDesc(0, 100);
 
         assertThat(result)
             .extracting(
