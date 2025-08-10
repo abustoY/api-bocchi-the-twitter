@@ -20,5 +20,28 @@ spring:
       hibernate:
         # The SQL dialect to use for the database
         dialect: org.hibernate.dialect.MySQL8Dialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: openid,profile,email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+          line:
+            client-id: ${LINE_CLIENT_ID}
+            client-secret: ${LINE_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            scope: openid,profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            client-name: LINE
+            provider: line
+        provider:
+          line:
+            authorization-uri: https://access.line.me/oauth2/v2.1/authorize
+            token-uri: https://api.line.me/oauth2/v2.1/token
+            user-info-uri: https://api.line.me/oauth2/v2.1/userinfo
+            user-name-attribute: sub
 client:
   origin: "http://localhost:8081"
