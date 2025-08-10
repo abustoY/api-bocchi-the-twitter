@@ -30,4 +30,17 @@ public class TweetRepositoryImpl implements TweetRepositoryCustom {
         q.setMaxResults(size);
         return q.getResultList();
     }
+
+    @Override
+    public List<Tweet> findByUser_IdInOrderByCreatedDesc(List<String> userIds, int offset, int size) {
+        if (userIds == null || userIds.isEmpty()) return List.of();
+        return em.createQuery(
+                        "SELECT t FROM Tweet t WHERE t.user.id IN :userIds ORDER BY t.created DESC",
+                        Tweet.class
+                )
+                .setParameter("userIds", userIds)
+                .setFirstResult(offset)
+                .setMaxResults(size)
+                .getResultList();
+    }
 }
