@@ -35,6 +35,7 @@ Twitter風SNSアプリケーションのバックエンドAPI
 - ユーザー登録
 - ログイン/ログアウト
 - Cookieベースのセッション管理
+- OIDC ログイン（Google）
 
 ## セキュリティ機能
 
@@ -48,6 +49,43 @@ Twitter風SNSアプリケーションのバックエンドAPI
 - POST `/api/authentication/login` - ログイン
 - POST `/api/authentication/logout` - ログアウト
 - GET `/api/authentication/status` - 認証状態確認
+- GET `/oauth2/authorization/{provider}` - OIDC 認可開始（例: google, line）
+- GET `/login/oauth2/code/{registrationId}` - OIDC コールバック（Spring Security 既定）
 
 
+## テスト
 
+### 使用技術
+- JUnit 5
+- AssertJ
+- Database Rider（DBUnit）
+
+### データセットの用意
+テストデータは YAML で管理します。配置場所は次のとおりです。
+
+```
+src/test/resources/datasets/
+  └─ tweets.yml
+```
+
+`tweets.yml` の例：
+
+```yaml
+users:
+  - id: "user1"
+    name: "テストユーザー"
+    password: "password"
+
+tweets:
+  - id: 1
+    user_id: "user1"
+    text: "最初のツイート"
+    created: "2024-01-01 10:00:00"
+```
+
+### テストクラスの書き方
+Database Rider を使うテストでは、`@DBRider` と `@DataSet` を付与してデータを投入します。
+
+### 補足
+- YAML のキーは **テーブル名** に合わせてください（外部キーは `user_id` など実カラム名）。
+- データの前後処理が必要な場合は `@DataSet(cleanBefore = true, cleanAfter = true)` を利用できます。
