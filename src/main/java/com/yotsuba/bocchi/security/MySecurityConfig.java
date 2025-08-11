@@ -24,7 +24,7 @@ public class MySecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            CustomOidcUserService customOidcUserService   // ← 追加
+            CustomOidcUserService customOidcUserService
     ) throws Exception {
         http
                 .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))

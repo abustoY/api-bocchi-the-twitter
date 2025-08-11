@@ -26,7 +26,7 @@ public class CustomOidcUserService extends OidcUserService {
         OidcUser oidcUser = super.loadUser(userRequest);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId(); // "google" or "line"
-        String sub = oidcUser.getSubject(); // OIDC の一意IDはこれが確実
+        String sub = oidcUser.getSubject();
         Map<String, Object> claims = oidcUser.getClaims();
         String name = String.valueOf(claims.getOrDefault("name", claims.getOrDefault("displayName", "User")));
 
