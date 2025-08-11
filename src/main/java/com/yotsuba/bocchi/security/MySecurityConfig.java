@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +22,10 @@ public class MySecurityConfig {
     private String clientOrigin;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            CustomOidcUserService customOidcUserService
+    ) throws Exception {
         http
                 .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
@@ -56,6 +58,13 @@ public class MySecurityConfig {
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         })
                 )
+                .oauth2Login(oauth -> oauth
+                        .userInfoEndpoint(u -> u.oidcUserService(customOidcUserService))
+                        .successHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_FOUND);
+                            response.setHeader("Location", clientOrigin + "/");
+                        })
+                )
                 .logout(logout -> logout
                         .logoutUrl("/api/authentication/logout")
                         .logoutSuccessHandler((request, response, authentication) -> {
@@ -69,6 +78,8 @@ public class MySecurityConfig {
                                 "/api/authentication/status",
                                 "/api/authentication/signup",
                                 "/api/authentication/login",
+                                "/oauth2/authorization/**",
+                                "/login/oauth2/code/**",
                                 "/api/tweets",
                                 "/api/media/**",
                                 "/error"

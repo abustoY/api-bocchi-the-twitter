@@ -19,6 +19,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 外部認証IDはフォームログイン不可
+        if (username.startsWith("google:") || username.startsWith("line:")) {
+            throw new UsernameNotFoundException("外部認証アカウントはフォームログインできません");
+        }
         User user = userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません: " + username));
         return new MyUserDetails(user.getPassword(), user.getId(), user.getName());

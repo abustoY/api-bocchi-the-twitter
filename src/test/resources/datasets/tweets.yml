@@ -2,6 +2,9 @@ users:
   - id: "user1"
     name: "テストユーザー"
     password: "password"
+  - id: "user2"
+    name: "サブユーザー"
+    password: "password2"
 
 tweets:
   - id: 1
@@ -28,6 +31,16 @@ tweets:
     user_id: "user1"
     text: "5番目のツイート"
     created: "2024-01-01 14:00:00"
+
+  - id: 6
+    user_id: "user2"
+    text: "user2の最初のツイート"
+    created: "2024-02-01 09:00:00"
+
+  - id: 7
+    user_id: "user2"
+    text: "user2の2番目のツイート"
+    created: "2024-02-01 09:30:00"
 
 media:
   - id: 1
@@ -69,3 +82,19 @@ media:
       R0lGODdhAQABAIAAAAUEBA==
     created: "2024-01-01 14:01:00"
     tweet_id: 5
+
+  - id: 6
+    file_name: "user2_image1.jpg"
+    content_type: "image/jpeg"
+    data: !!binary |
+      R0lGODdhAQABAIAAAAUEBA==
+    created: "2024-02-01 09:01:00"
+    tweet_id: 6
+
+  - id: 7
+    file_name: "user2_image2.png"
+    content_type: "image/png"
+    data: !!binary |
+      iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB
+    created: "2024-02-01 09:31:00"
+    tweet_id: 7
