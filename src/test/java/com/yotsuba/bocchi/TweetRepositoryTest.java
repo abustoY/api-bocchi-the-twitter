@@ -2,6 +2,8 @@ package com.yotsuba.bocchi;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
+import com.yotsuba.bocchi.entity.Tweet;
+import com.yotsuba.bocchi.repository.TweetRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

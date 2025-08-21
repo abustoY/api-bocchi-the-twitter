@@ -1,5 +1,6 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.repository;
 
+import com.yotsuba.bocchi.entity.Tweet;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

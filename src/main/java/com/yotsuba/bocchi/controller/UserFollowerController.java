@@ -1,7 +1,8 @@
 
 
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.controller;
 
+import com.yotsuba.bocchi.service.UserFollowerService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.dto;
 
 public class TweetRequest {
     private String userId;

@@ -1,5 +1,7 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.service;
 
+import com.yotsuba.bocchi.entity.Media;
+import com.yotsuba.bocchi.repository.MediaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

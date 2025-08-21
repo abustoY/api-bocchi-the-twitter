@@ -1,4 +1,6 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.repository;
+import com.yotsuba.bocchi.entity.Tweet;
+
 import java.util.List;
 
 public interface TweetRepositoryCustom {

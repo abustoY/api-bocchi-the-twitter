@@ -1,7 +1,7 @@
 package com.yotsuba.bocchi.security;
 
-import com.yotsuba.bocchi.User;
-import com.yotsuba.bocchi.UserService;
+import com.yotsuba.bocchi.entity.User;
+import com.yotsuba.bocchi.service.UserService;
 import com.yotsuba.bocchi.dto.AuthenticatedUserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
