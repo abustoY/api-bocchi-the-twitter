@@ -1,5 +1,6 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.controller;
 
+import com.yotsuba.bocchi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

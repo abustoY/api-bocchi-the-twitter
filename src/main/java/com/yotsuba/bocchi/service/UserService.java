@@ -1,5 +1,7 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.service;
 
+import com.yotsuba.bocchi.entity.User;
+import com.yotsuba.bocchi.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

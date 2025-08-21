@@ -1,6 +1,6 @@
 package com.yotsuba.bocchi.security;
 
-import com.yotsuba.bocchi.UserService;
+import com.yotsuba.bocchi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

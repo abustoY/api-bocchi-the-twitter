@@ -1,5 +1,9 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.service;
 
+import com.yotsuba.bocchi.entity.User;
+import com.yotsuba.bocchi.entity.UserFollower;
+import com.yotsuba.bocchi.repository.UserFollowerRepository;
+import com.yotsuba.bocchi.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

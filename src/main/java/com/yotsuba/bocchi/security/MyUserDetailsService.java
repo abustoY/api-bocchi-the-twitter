@@ -1,7 +1,7 @@
 package com.yotsuba.bocchi.security;
 
-import com.yotsuba.bocchi.User;
-import com.yotsuba.bocchi.UserRepository;
+import com.yotsuba.bocchi.entity.User;
+import com.yotsuba.bocchi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

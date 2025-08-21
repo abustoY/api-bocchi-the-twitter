@@ -1,4 +1,4 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.entity;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;

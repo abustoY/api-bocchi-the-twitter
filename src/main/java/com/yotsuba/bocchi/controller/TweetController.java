@@ -1,10 +1,9 @@
-package com.yotsuba.bocchi;
+package com.yotsuba.bocchi.controller;
 
+import com.yotsuba.bocchi.service.TweetService;
 import com.yotsuba.bocchi.dto.TweetDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
